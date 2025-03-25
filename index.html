@@ -1,31 +1,73 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dữ liệu hành khách</title>
+    <title>Thông tin hành khách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        .info {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Thông tin hành khách mới nhất</h2>
-    <button onclick="fetchData()">Cập nhật dữ liệu</button>
-    <div id="data"></div>
+    <div class="container">
+        <h2>Thông tin hành khách mới nhất</h2>
+        <div id="data">
+            <p class="info"><strong>ID:</strong> <span id="id">...</span></p>
+            <p class="info"><strong>Tên:</strong> <span id="name">...</span></p>
+            <p class="info"><strong>Cân nặng:</strong> <span id="weight">...</span> kg</p>
+            <p class="info"><strong>Chuyến bay:</strong> <span id="flight">...</span></p>
+        </div>
+        <button class="btn" onclick="fetchData()">Cập nhật dữ liệu</button>
+    </div>
 
     <script>
         async function fetchData() {
-            const url = "https://script.google.com/macros/s/AKfycbzh83DQAclJsJ2XjhE9uRTp2xxYs06qJ3nNoBkLNmsCHFWjgmdwEj33Yn-nWwCOpAEU1w/exec"; // Thay URL API Google Sheets
-
+            const url = "const url = "https://script.google.com/macros/s/AKfycbzh83DQAclJsJ2XjhE9uRTp2xxYs06qJ3nNoBkLNmsCHFWjgmdwEj33Yn-nWwCOpAEU1w/exec"; // Thay URL API Google Sheets"; // API Google Sheets
             const response = await fetch(url);
             const data = await response.json();
 
-            let output = `<p><strong>ID:</strong> ${data[0]}</p>`;
-            output += `<p><strong>Tên:</strong> ${data[1]}</p>`;
-            output += `<p><strong>Cân nặng:</strong> ${data[2]} kg</p>`;
-            output += `<p><strong>Chuyến bay:</strong> ${data[3]}</p>`;
-
-            document.getElementById("data").innerHTML = output;
+            document.getElementById("id").textContent = data[0];
+            document.getElementById("name").textContent = data[1];
+            document.getElementById("weight").textContent = data[2];
+            document.getElementById("flight").textContent = data[3];
         }
 
-        fetchData(); // Load dữ liệu khi mở trang
+        fetchData(); // Tải dữ liệu ngay khi mở trang
     </script>
 </body>
 </html>
