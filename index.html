@@ -1,32 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dữ liệu chuyến bay</title>
+    <title>Dữ liệu hành khách</title>
 </head>
 <body>
-    <h2>Thông tin hành khách</h2>
+    <h2>Thông tin hành khách mới nhất</h2>
     <button onclick="fetchData()">Cập nhật dữ liệu</button>
     <div id="data"></div>
 
     <script>
         async function fetchData() {
             const url = "https://script.google.com/macros/s/AKfycbzh83DQAclJsJ2XjhE9uRTp2xxYs06qJ3nNoBkLNmsCHFWjgmdwEj33Yn-nWwCOpAEU1w/exec"; // Thay URL API Google Sheets
+
             const response = await fetch(url);
             const data = await response.json();
 
-            let output = "<table border='1'><tr><th>ID</th><th>Tên</th><th>Cân nặng</th><th>Chuyến bay</th></tr>";
-            data.slice(1).forEach(row => { 
-                output += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`;
-            });
-            output += "</table>";
+            let output = `<p><strong>ID:</strong> ${data[0]}</p>`;
+            output += `<p><strong>Tên:</strong> ${data[1]}</p>`;
+            output += `<p><strong>Cân nặng:</strong> ${data[2]} kg</p>`;
+            output += `<p><strong>Chuyến bay:</strong> ${data[3]}</p>`;
 
             document.getElementById("data").innerHTML = output;
         }
 
-        fetchData(); // Tự động load dữ liệu khi mở trang
+        fetchData(); // Load dữ liệu khi mở trang
     </script>
 </body>
 </html>
